@@ -11,6 +11,7 @@ namespace Entities
         private NorthwindContext context = new NorthwindContext();
         private GenericRepository<Category> categoryRepository;
         private GenericRepository<Customer> customerRepository;
+        private GenericRepository<Order> orderRepository;
         public GenericRepository<Category> CategoryRepository
         {
             get
@@ -24,6 +25,8 @@ namespace Entities
             }
         }
 
+
+
         public GenericRepository<Customer> CustomerRepository
         {
             get
@@ -34,6 +37,19 @@ namespace Entities
                     this.customerRepository = new GenericRepository<Customer>(context);
                 }
                 return customerRepository;
+            }
+        }
+
+
+        public GenericRepository<Order> OrderRepository
+        {
+            get
+            {
+                if (this.orderRepository == null)
+                {
+                    this.orderRepository = new GenericRepository<Order>(context);
+                }
+                return orderRepository;
             }
         }
 
