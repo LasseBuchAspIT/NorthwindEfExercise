@@ -388,5 +388,3 @@ foreach(string s in returnStrings)
 
 Console.WriteLine("\n4.2: \n--------------------------------------");
 
-UnitOfWork unitOfWork = new();
-

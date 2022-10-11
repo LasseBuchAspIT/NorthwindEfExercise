@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,20 @@ namespace Entities
 {
     public class UnitOfWork : IDisposable
     {
-        private NorthwindContext context = new NorthwindContext();
-        private GenericRepository<Category> categoryRepository;
-        private GenericRepository<Customer> customerRepository;
+        private NorthwindContext context;
+
+        public UnitOfWork(NorthwindContext context)
+        {
+            this.context = context;
+            categoryRepository = new(context);
+        }
+
+        private CategoryRepository categoryRepository;
+        private CustomerRepository customerRepository;
         private GenericRepository<Order> orderRepository;
         public GenericRepository<Category> CategoryRepository
         {
-            get
-            {
-
-                if (this.categoryRepository == null)
-                {
-                    this.categoryRepository = new GenericRepository<Category>(context);
-                }
-                return categoryRepository;
-            }
+            get => categoryRepository;
         }
 
 
