@@ -1,5 +1,7 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Formats.Asn1;
+
 
 NorthwindContext context = new();
 Console.WriteLine("1.1: \n--------------------------------------");
@@ -387,4 +389,25 @@ foreach(string s in returnStrings)
 }
 
 Console.WriteLine("\n4.2: \n--------------------------------------");
+
+foreach(Order o in context.Orders)
+{
+    if(o.CustomerId == "TSTMP")
+    {
+        context.Orders.Remove(o);
+    }
+}
+
+foreach(Customer c in context.Customers.ToList())
+{
+    if (c.CustomerId == "TSTMP")
+    {
+        context.Customers.Remove(c);
+    }
+}
+context.SaveChanges();
+
+UnitOfWork unitOfWork = new(context);
+
+Console.WriteLine(unitOfWork.CustomerRepository.GetByID("TSTMP").CompanyName);
 

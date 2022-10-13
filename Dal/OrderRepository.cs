@@ -11,6 +11,12 @@ namespace Dal
     {
         public OrderRepository(NorthwindContext context) : base(context)
         {
+
+        }
+
+        public List<Order> GetAllOrdersFromCustomer(Customer customer)
+        {
+            return dbSet.Where(o => o.CustomerId == customer.CustomerId).ToList();
         }
     }
 }
