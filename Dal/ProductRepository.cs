@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,10 @@ namespace Dal
         {
             return dbSet.Where(p => p.UnitPrice < price).ToList();
         }
+
+        public Product GetProductByName(string name)
+        {
+            return dbSet.Where(p => p.ProductName == name).First();
+        }
     }
-
-
 }
