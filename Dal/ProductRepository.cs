@@ -33,5 +33,15 @@ namespace Dal
         {
             return dbSet.Where(p => p.ProductName == name).First();
         }
+
+        public async Task<Product> GetProductByNameAsync(string name)
+        {
+            return await dbSet.Where(p => p.ProductName == name).FirstOrDefaultAsync();
+        }
+
+        public async Task AddNewProdcutWithExistingSupplierAsync(Product p)
+        {
+            await dbSet.AddAsync(p);
+        }
     }
 }

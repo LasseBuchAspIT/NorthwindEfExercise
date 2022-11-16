@@ -18,12 +18,14 @@ namespace Entities
             customerRepository = new(context);
             orderRepository = new(context);
             productRepository = new(context);
+            supplierRepository = new(context);
         }
 
         private CategoryRepository categoryRepository;
         private CustomerRepository customerRepository;
         private OrderRepository orderRepository;
         private ProductRepository productRepository;
+        private SupplierRepository supplierRepository;
         public CategoryRepository CategoryRepository
         {
             get => categoryRepository;
@@ -43,10 +45,19 @@ namespace Entities
         {
             get => productRepository;
         }
+        public SupplierRepository SupplierRepository 
+        {
+            get => supplierRepository;
+        }
 
         public void Save()
         {
             context.SaveChanges();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await context.SaveChangesAsync();
         }
 
         private bool disposed = false;
